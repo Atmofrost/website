@@ -1,0 +1,34 @@
+---
+import FormattedDate from '@components/FormattedDate.astro';
+import Base from '@layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+const news = (await getCollection('news')).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf(),
+);
+---
+
+<Base
+  title="Atmofrost · News"
+  page="news"
+  description="Press notes, releases, milestones, and corporate housekeeping from Atmofrost Inc."
+>
+  {
+    news.length === 0 ? (
+      <p class="af-run" style="color: var(--af-mute); font-style: italic;">
+        No posts yet.
+      </p>
+    ) : (
+      news.map((entry) => (
+        <div class="af-row">
+          <span class="d">
+            <FormattedDate date={entry.data.date} />
+          </span>
+          <div class="t">
+            <a href={`/news/${entry.id}/`}>{entry.data.title}</a>
+          </div>
+        </div>
+      ))
+    )
+  }
+</Base>

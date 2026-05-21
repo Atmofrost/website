@@ -1,0 +1,11 @@
+---
+interface Props {
+  label: string;
+}
+
+const { label } = Astro.props;
+---
+
+<p class="af-run">
+  <em class="k">{label}</em><slot />
+</p>

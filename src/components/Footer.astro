@@ -1,0 +1,22 @@
+---
+import { footerLinks } from '@data/nav';
+---
+
+<footer class="af-foot">
+  <span>&copy; 2026 Atmofrost Inc.</span>
+  <ul>
+    {
+      footerLinks.map((link) => (
+        <li>
+          <a
+            href={link.href}
+            target={link.external ? '_blank' : undefined}
+            rel={link.external ? 'noreferrer' : undefined}
+          >
+            {link.label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</footer>

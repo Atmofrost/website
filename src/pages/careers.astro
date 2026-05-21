@@ -1,0 +1,40 @@
+---
+import Memo from '@components/Memo.astro';
+import { jobs } from '@data/careers';
+import Base from '@layouts/Base.astro';
+---
+
+<Base
+  title="Atmofrost · Careers"
+  page="careers"
+  description="Open corporate roles at Atmofrost Inc., including legal, operations, and communications."
+>
+  <h1 class="af-title">
+    Careers
+  </h1>
+
+  {
+    jobs.length > 0 ? (
+      jobs.map((job) => (
+        <>
+          <h2 class="af-h2">
+            <span class="num">{job.numeral}</span> {job.title}
+          </h2>
+          <Memo label={job.department}>
+            <p>{job.description}</p>
+            <p style="color: var(--af-mute); font-style: italic;">
+              {job.location}
+            </p>
+          </Memo>
+        </>
+      ))
+    ) : (
+      <>
+        <p>
+            There are no corporate roles posted right now. When we have openings,
+            they will appear here with department, scope, and location.
+          </p>
+      </>
+    )
+  }
+</Base>

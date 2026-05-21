@@ -1,0 +1,38 @@
+---
+import FormattedDate from '@components/FormattedDate.astro';
+import Base from '@layouts/Base.astro';
+import type { CollectionEntry } from 'astro:content';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('news');
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: post,
+  }));
+}
+
+type Props = CollectionEntry<'news'>;
+const post = Astro.props;
+const { Content } = await render(post);
+---
+
+<Base
+  title={`Atmofrost · ${post.data.title}`}
+  page="news"
+  description="Press notes, releases, milestones, and corporate housekeeping from Atmofrost Inc."
+>
+  <p class="af-run">
+    <a href="/news/">← News</a>
+  </p>
+
+  <p class="af-run" style="color: var(--af-mute); margin-bottom: 8px;">
+    <FormattedDate date={post.data.date} />
+  </p>
+
+  <h1 class="af-title">{post.data.title}</h1>
+
+  <div class="af-prose">
+    <Content />
+  </div>
+</Base>

@@ -1,0 +1,37 @@
+---
+import Memo from '@components/Memo.astro';
+import { products } from '@data/products';
+import Base from '@layouts/Base.astro';
+
+const displayHref = (href: string) => href.replace(/^https?:\/\//, '');
+---
+
+<Base
+  title="Atmofrost · Products"
+  page="products"
+  description="Three Polyfrost operating properties held by Atmofrost and shipped as open-source software."
+>
+  <h1 class="af-title">
+    Our projects
+  </h1>
+
+  <hr class="af-rule" />
+
+  {
+    products.map((product) => (
+      <Memo label={`${product.numeral} ${product.name}`}>
+        <p>{product.blurb}</p>
+        <p style="color: var(--af-mute); font-style: italic;">
+          {product.meta}
+          {product.href && product.meta !== 'Browse at' ? ' · ' : ' '}
+          {product.href && (
+            <a href={product.href} target="_blank" rel="noreferrer">
+              {displayHref(product.href)}
+            </a>
+          )}
+          {product.name === 'The catalog' ? '.' : ''}
+        </p>
+      </Memo>
+    ))
+  }
+</Base>

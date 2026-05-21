@@ -1,0 +1,17 @@
+---
+interface Props {
+  label: string;
+  class?: string;
+  labelStyle?: string;
+  [key: string]: unknown;
+}
+
+const { label, class: className, labelStyle, ...attrs } = Astro.props;
+---
+
+<div {...attrs} class:list={['af-memo', className]}>
+  <span class="lbl" style={labelStyle}>{label}</span>
+  <div class="body">
+    <slot />
+  </div>
+</div>

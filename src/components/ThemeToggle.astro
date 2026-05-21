@@ -1,0 +1,47 @@
+<button
+  type="button"
+  class="af-theme-toggle"
+  id="af-theme-toggle"
+  aria-label="Switch to dark mode"
+>
+  <span class="af-theme-toggle-label">Dark</span>
+</button>
+
+<script>
+  const STORAGE_KEY = 'af-theme';
+  const btn = document.getElementById('af-theme-toggle');
+  const label = btn?.querySelector('.af-theme-toggle-label');
+
+  function isDark() {
+    return document.documentElement.getAttribute('data-bg') === 'dark';
+  }
+
+  function applyTheme(theme: 'light' | 'dark') {
+    if (theme === 'dark') {
+      document.documentElement.setAttribute('data-bg', 'dark');
+    } else {
+      document.documentElement.removeAttribute('data-bg');
+    }
+    localStorage.setItem(STORAGE_KEY, theme);
+    if (label) label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    btn?.setAttribute(
+      'aria-label',
+      theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+    );
+  }
+
+  function syncLabel() {
+    const theme = isDark() ? 'dark' : 'light';
+    if (label) label.textContent = theme === 'dark' ? 'Light' : 'Dark';
+    btn?.setAttribute(
+      'aria-label',
+      theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode',
+    );
+  }
+
+  btn?.addEventListener('click', () => {
+    applyTheme(isDark() ? 'light' : 'dark');
+  });
+
+  syncLabel();
+</script>

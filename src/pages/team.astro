@@ -1,0 +1,37 @@
+---
+import Memo from '@components/Memo.astro';
+import Run from '@components/Run.astro';
+import { people, advisors } from '@data/team';
+import Base from '@layouts/Base.astro';
+---
+
+<Base
+  title="Atmofrost · Team"
+  page="team"
+  description="The corporate team behind Atmofrost and a selected list of Polyfrost studio contributors."
+>
+  <h1 class="af-title">Team</h1>
+
+  {
+    people.map((person) => (
+      <Memo label={person.name}>
+        <p>{person.description}</p>
+      </Memo>
+    ))
+  }
+
+  <h2 class="af-h2">Notable advisors</h2>
+
+  {
+    advisors.map((person) => (
+      <Memo label={person.name}>{person.description}</Memo>
+    ))
+  }
+
+  <p
+    class="af-prose"
+    style="margin-top: 36px; color: var(--af-mute); font-style: italic;"
+  >
+    Atmofrost may be hiring. See <a href="/careers/">careers</a> for more information
+  </p>
+</Base>

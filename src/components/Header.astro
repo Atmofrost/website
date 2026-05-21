@@ -1,0 +1,30 @@
+---
+import ThemeToggle from '@components/ThemeToggle.astro';
+import { mainNav, type PageKey } from '@data/nav';
+
+interface Props {
+  active?: PageKey;
+}
+
+const { active } = Astro.props;
+---
+
+<header class="af-head">
+  <a class="af-brand" href="/">Atmofrost</a>
+  <div class="af-head-actions">
+    <nav class="af-nav" aria-label="Primary">
+      {
+        mainNav.map((item) => (
+          <a
+            href={item.href}
+            class:list={{ 'is-active': item.key === active }}
+            aria-current={item.key === active ? 'page' : undefined}
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+    <ThemeToggle />
+  </div>
+</header>

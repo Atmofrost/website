@@ -1,0 +1,34 @@
+---
+import Memo from '@components/Memo.astro';
+import Base from '@layouts/Base.astro';
+---
+
+<Base
+  title="Atmofrost · Contact"
+  page="contact"
+  description="Contact desks for Atmofrost press, legal, investor relations, post, and general inquiries."
+>
+  <h1 class="af-title">
+    Contact
+  </h1>
+
+  <Memo label="Email">
+    <p>
+      <a href="mailto:contact@atmofrost.org">contact@atmofrost.org</a>
+    </p>
+  </Memo>
+  <Memo label="Address">
+    <p>2093 Philadelphia Pike #7135, Claymont, DE 19703</p>
+  </Memo>
+
+  <p
+    class="af-prose"
+    style="margin-top: 36px; color: var(--af-mute); font-style: italic;"
+  >
+    For Polyfrost project support, please use the <a
+      href="https://polyfrost.org/discord"
+      target="_blank"
+      rel="noreferrer">community Discord</a
+    > instead.
+  </p>
+</Base>
